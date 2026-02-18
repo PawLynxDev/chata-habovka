@@ -28,7 +28,7 @@ export default function ImagePlaceholder({
           fill
           sizes={sizes}
           className="object-cover"
-          quality={85}
+          quality={100}
           {...(priority ? { priority: true } : { loading: "lazy" as const })}
         />
       </div>
