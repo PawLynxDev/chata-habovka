@@ -22,9 +22,12 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Kontakt & Rezervácia",
+  title: "Kontakt & Rezervácia - Rezervujte si pobyt",
   description:
-    "Kontaktujte nás alebo si rezervujte pobyt v Chate za Studeným potokom v Habovke.",
+    "Rezervujte si pobyt v Chate za Studeným potokom v Habovke. Adresa: Pod Jamami 514/37, Habovka. Telefón: +421 948 280 363. Check-in od 15:00, check-out do 10:00.",
+  alternates: {
+    canonical: "https://chatazastudenympotokom.sk/kontakt",
+  },
 };
 
 const practicalInfo = [

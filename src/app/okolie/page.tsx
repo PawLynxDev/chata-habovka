@@ -5,9 +5,12 @@ import BookingButton from "@/components/ui/BookingButton";
 import { MapPin, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Okolie & Aktivity | Chata za Studeným potokom",
+  title: "Okolie & Aktivity - Roháče, Lyžovanie, Turistika",
   description:
-    "Turistika, cyklistika, lyžovanie a termálne kúpele v okolí našej chaty v Habovke.",
+    "Aktivity v okolí Chaty za Studeným potokom: Skipark Roháče, turistika, cyklistika, rafting na Dunajci, termálne kúpele a Oravský hrad. Habovka, Západné Tatry.",
+  alternates: {
+    canonical: "https://chatazastudenympotokom.sk/okolie",
+  },
 };
 
 const attractions = [

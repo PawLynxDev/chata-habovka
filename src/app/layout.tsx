@@ -20,32 +20,77 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://chatazastudenympotokom.sk"),
   title: {
-    default: "Chata za Studeným potokom | Prémiové ubytovanie Habovka, Orava",
+    default:
+      "Chata za Studeným potokom | Prémiové ubytovanie Habovka, Západné Tatry",
     template: "%s | Chata za Studeným potokom",
   },
   description:
-    "Luxusná horská chata v Habovke s wellness, saunou a vírivkou. Súkromie pre jednu skupinu hostí. Západné Tatry, Roháče.",
+    "Luxusná horská chata v Habovke s privátnym wellness, fínskou saunou a vírivkou. Ubytovanie až pre 13 hostí s exkluzívnym súkromím. Roháče, Západné Tatry, Orava.",
   keywords: [
-    "chata",
-    "Habovka",
-    "prenájom",
-    "wellness",
-    "sauna",
-    "vírivka",
-    "Roháče",
-    "Západné Tatry",
+    "chata Habovka",
+    "chata za Studeným potokom",
+    "ubytovanie Habovka",
+    "prenájom chaty Habovka",
+    "chata Roháče",
+    "chata Západné Tatry",
+    "ubytovanie Orava",
+    "chata s wellness",
+    "chata so saunou",
+    "chata s vírivkou",
+    "horská chata prenájom",
+    "luxusná chata Slovensko",
+    "dovolenka Habovka",
+    "ubytovanie Roháče",
+    "chata pre rodiny",
+    "privátne ubytovanie hory",
+    "chata Orava",
+    "wellness chata",
+    "sauna vírivka chata",
+    "Skipark Roháče ubytovanie",
   ],
+  alternates: {
+    canonical: "https://chatazastudenympotokom.sk",
+  },
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",
   },
   openGraph: {
-    title: "Chata za Studeným potokom | Prémiové ubytovanie Habovka, Orava",
+    title: "Chata za Studeným potokom | Prémiové ubytovanie Habovka",
     description:
-      "Luxusná horská chata v Habovke s wellness, saunou a vírivkou.",
+      "Luxusná horská chata v Habovke s privátnym wellness, fínskou saunou a vírivkou. Ubytovanie až pre 13 hostí. Roháče, Západné Tatry.",
     type: "website",
     locale: "sk_SK",
+    url: "https://chatazastudenympotokom.sk",
+    siteName: "Chata za Studeným potokom",
+    images: [
+      {
+        url: "/images/fotoOfHouse/upscalemedia-transformed (1).webp",
+        width: 1200,
+        height: 630,
+        alt: "Chata za Studeným potokom - luxusná horská chata v Habovke",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chata za Studeným potokom | Prémiové ubytovanie Habovka",
+    description:
+      "Luxusná horská chata v Habovke s privátnym wellness, saunou a vírivkou. Až 13 hostí. Roháče, Západné Tatry.",
+    images: ["/images/fotoOfHouse/upscalemedia-transformed (1).webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -65,12 +110,14 @@ export default function RootLayout({
               "@type": "LodgingBusiness",
               name: "Chata za Studeným potokom",
               description:
-                "Luxusná horská chata v Habovke s wellness, saunou a vírivkou.",
+                "Luxusná horská chata v Habovke s privátnym wellness, fínskou saunou a vírivkou. Ubytovanie až pre 13 hostí s exkluzívnym súkromím. Roháče, Západné Tatry, Orava.",
+              image: "https://chatazastudenympotokom.sk/images/fotoOfHouse/upscalemedia-transformed (1).webp",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Pod Jamami 514/37",
                 addressLocality: "Habovka",
                 postalCode: "027 32",
+                addressRegion: "Žilinský kraj",
                 addressCountry: "SK",
               },
               geo: {
@@ -78,15 +125,31 @@ export default function RootLayout({
                 latitude: 49.274138,
                 longitude: 19.602702,
               },
-              telephone: "+421 948 280 363",
-              url: "https://www.megaubytovanie.sk/chata-za-studenym-potokom",
-              amenityFeature: [
-                { "@type": "LocationFeatureSpecification", name: "Sauna" },
-                { "@type": "LocationFeatureSpecification", name: "Hot tub" },
-                { "@type": "LocationFeatureSpecification", name: "Fireplace" },
-                { "@type": "LocationFeatureSpecification", name: "Free WiFi" },
-                { "@type": "LocationFeatureSpecification", name: "Parking" },
+              telephone: "+421948280363",
+              url: "https://chatazastudenympotokom.sk",
+              sameAs: [
+                "https://www.megaubytovanie.sk/chata-za-studenym-potokom",
               ],
+              checkinTime: "15:00",
+              checkoutTime: "10:00",
+              numberOfRooms: 4,
+              petsAllowed: false,
+              amenityFeature: [
+                { "@type": "LocationFeatureSpecification", name: "Fínska sauna", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Vírivka", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Krb", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Wi-Fi zadarmo", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Parkovanie", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Klimatizácia", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Podlahové kúrenie", value: true },
+                { "@type": "LocationFeatureSpecification", name: "Detské ihrisko", value: true },
+              ],
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "4.8",
+                bestRating: "5",
+                ratingCount: "56",
+              },
             }),
           }}
         />

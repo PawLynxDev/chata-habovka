@@ -5,9 +5,12 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import BookingButton from "@/components/ui/BookingButton";
 
 export const metadata: Metadata = {
-  title: "Wellness & Záhrada | Chata za Studeným potokom",
+  title: "Wellness & Záhrada - Sauna, Vírivka, Terasa",
   description:
-    "Fínska sauna, vírivka pod holým nebom, dažďové sprchy a rozľahlá záhrada s altánkom.",
+    "Privátny wellness v Chate za Studeným potokom: fínska sauna pre 6 osôb, vírivka pod holým nebom s výhľadom na hory, dažďové sprchy, rozľahlá terasa a detské ihrisko v Habovke.",
+  alternates: {
+    canonical: "https://chatazastudenympotokom.sk/wellness",
+  },
 };
 
 const wellnessImages = [
