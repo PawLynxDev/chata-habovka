@@ -73,20 +73,23 @@ const imageMap: Record<string, string> = {
   "kids-1": "/images/spaceforchildre/a13887-chata-za-studenym-potokom-20251219-082618-1667.webp",
   "kids-2": "/images/spaceforchildre/a13887-chata-za-studenym-potokom-20251219-082619-5322.webp",
 
-  // === ACTIVITIES (15) ===
-  "summer-hiking": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260129-113701-3433.webp",
-  "summer-cycling": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260112-185715-1667.webp",
-  "summer-museum": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20251223-150253-1881.webp",
-  "summer-rafting": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260112-185715-1502.webp",
-  "summer-lake": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260112-185714-4483.webp",
-  "summer-castle": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20251223-150256-1092.webp",
-  "summer-nature": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260112-190107-3089.webp",
-  "winter-ski": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260102-215637-9277.webp",
-  "winter-crosscountry": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260110-142055-1834.webp",
-  "winter-snowboard": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260104-130122-8336.webp",
-  "winter-hiking": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260110-142059-2276.webp",
-  "thermal-baths": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20251223-150259-7893.webp",
-  "zakopane": "/images/activitiesNearby/a13887-chata-za-studenym-potokom-20260112-190110-7326.webp",
+  // === ACTIVITIES / OKOLIE (16) ===
+  "summer-stream": "/images/okolie&aktivity/studenyPotok.webp",
+  "winter-ski": "/images/okolie&aktivity/SkiparkRohace-Janovky.jpg",
+  "summer-folklore": "/images/okolie&aktivity/PodrohacskeFolklorneSlavnosti.jpg",
+  "summer-hiking": "/images/okolie&aktivity/turistikaVRohacoch.jpg",
+  "summer-cycling": "/images/okolie&aktivity/cyklistika.jpg",
+  "winter-crosscountry": "/images/okolie&aktivity/bezkovanie.jpg",
+  "summer-sports": "/images/okolie&aktivity/sportARekreacia.jpg",
+  "summer-nature": "/images/okolie&aktivity/Tarzania-Jasna.jpg",
+  "summer-museum": "/images/okolie&aktivity/muzeum-oravskej-dediny-15.avif",
+  "winter-snowboard": "/images/okolie&aktivity/snowboarding_snowpark.jpg",
+  "winter-hiking": "/images/okolie&aktivity/zimnaTuristika.jpg",
+  "thermal-baths": "/images/okolie&aktivity/termalneKupele.jpg",
+  "summer-rafting": "/images/okolie&aktivity/SplavOravaRafting.jpg",
+  "summer-lake": "/images/okolie&aktivity/oravskaPriehrada.jpg",
+  "summer-castle": "/images/okolie&aktivity/oravsky-hrad58781489.jpg",
+  "zakopane": "/images/okolie&aktivity/zakopaneSmokovec.webp",
 };
 
 export default imageMap;
