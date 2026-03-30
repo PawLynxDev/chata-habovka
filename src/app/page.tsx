@@ -4,6 +4,7 @@ import WellnessTeaser from "@/components/sections/WellnessTeaser";
 import InteriorTeaser from "@/components/sections/InteriorTeaser";
 import Reviews from "@/components/sections/Reviews";
 import PrivacyBanner from "@/components/sections/PrivacyBanner";
+import Pricing from "@/components/sections/Pricing";
 import BottomCTA from "@/components/sections/BottomCTA";
 import SectionTransition from "@/components/ui/SectionTransition";
 
@@ -20,7 +21,9 @@ export default function Home() {
       <Reviews />
       <SectionTransition from="#1A1A1A" to="#2D5016" />
       <PrivacyBanner />
-      <SectionTransition from="#2D5016" to="#F0E8D8" />
+      <SectionTransition from="#2D5016" to="#FAF6F0" />
+      <Pricing />
+      <SectionTransition from="#FAF6F0" to="#F0E8D8" />
       <BottomCTA />
     </>
   );

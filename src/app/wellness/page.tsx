@@ -19,7 +19,7 @@ const wellnessImages = [
   { name: "wellness-shower", alt: "Dažďové sprchy" },
 ];
 
-const terraceImages = Array.from({ length: 8 }, (_, i) => ({
+const terraceImages = Array.from({ length: 17 }, (_, i) => ({
   name: `terrace-${i + 1}`,
   alt: `Terasa a záhrada - foto ${i + 1}`,
 }));
@@ -118,16 +118,29 @@ export default function WellnessPage() {
             </p>
           </ScrollReveal>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-            {terraceImages.map((img, i) => (
-              <ScrollReveal key={img.name} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
-                <ImagePlaceholder
-                  name={img.name}
-                  alt={img.alt}
-                  className="w-full aspect-[4/3] rounded-lg"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-              </ScrollReveal>
-            ))}
+            {terraceImages.map((img, i) => {
+              const isWide = i === 0 || i >= 15;
+              return (
+                <ScrollReveal
+                  key={img.name}
+                  delay={((i % 4) + 1) as 1 | 2 | 3 | 4}
+                  className={isWide ? "col-span-2" : ""}
+                >
+                  <ImagePlaceholder
+                    name={img.name}
+                    alt={img.alt}
+                    className={`w-full rounded-lg ${
+                      isWide ? "aspect-[16/9]" : "aspect-[4/3]"
+                    }`}
+                    sizes={
+                      isWide
+                        ? "(max-width: 768px) 100vw, 50vw"
+                        : "(max-width: 768px) 50vw, 25vw"
+                    }
+                  />
+                </ScrollReveal>
+              );
+            })}
           </div>
         </div>
       </section>

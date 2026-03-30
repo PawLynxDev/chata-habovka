@@ -52,7 +52,7 @@ const imageMap: Record<string, string> = {
   "wellness-hottub": "/images/wellness/a13887-chata-za-studenym-potokom-20251219-075030-8459.webp",
   "wellness-shower": "/images/wellness/a13887-chata-za-studenym-potokom-20251219-075031-6981.webp",
 
-  // === TERRACE & YARD (15) ===
+  // === TERRACE & YARD (17) ===
   "terrace-1": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20251219-074906-3637.webp",
   "terrace-2": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20251219-075029-4364.webp",
   "terrace-3": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20251219-081035-4217.webp",
@@ -64,10 +64,12 @@ const imageMap: Record<string, string> = {
   "terrace-9": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20251219-081756-1853.webp",
   "terrace-10": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20251219-081756-9668.webp",
   "terrace-11": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20251219-110755-7348.webp",
-  "terrace-12": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20251226-150834-7434.webp",
-  "terrace-13": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20260112-190106-2613.webp",
-  "terrace-14": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20251219-081716-2673.webp",
-  "terrace-15": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20251219-075031-6981.webp",
+  "terrace-12": "/images/viewOfTheTerraceandYard/a13887-chata-za-studenym-potokom-20260112-190106-2613.webp",
+  "terrace-13": "/images/viewOfTheTerraceandYard/1000028654.jpg",
+  "terrace-14": "/images/viewOfTheTerraceandYard/1000028655.jpg",
+  "terrace-15": "/images/viewOfTheTerraceandYard/1000028661.jpg",
+  "terrace-16": "/images/viewOfTheTerraceandYard/1000028664.jpg",
+  "terrace-17": "/images/viewOfTheTerraceandYard/1000028666.jpg",
 
   // === KIDS AREA (2) ===
   "kids-1": "/images/spaceforchildre/a13887-chata-za-studenym-potokom-20251219-082618-1667.webp",
