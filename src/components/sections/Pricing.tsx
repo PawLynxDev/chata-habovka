@@ -5,45 +5,45 @@ const seasons = [
   {
     name: "Zimná sezóna",
     dates: "2. 1. – 31. 3.",
-    price: 230,
-    minNights: 2,
+    price: 250,
+    minNights: 3,
   },
   {
     name: "Letná mimosezóna",
     dates: "1. 4. – 30. 6.",
-    price: 230,
+    price: 250,
     minNights: 2,
   },
   {
     name: "Veľkonočný pobyt",
     dates: "3. 4. – 6. 4.",
-    price: 300,
+    price: 350,
     minNights: 3,
     highlight: true,
   },
   {
     name: "Letná sezóna",
     dates: "1. 7. – 31. 8.",
-    price: 230,
-    minNights: 2,
+    price: 250,
+    minNights: 3,
   },
   {
     name: "Zimná mimosezóna",
     dates: "1. 9. – 22. 12.",
-    price: 230,
+    price: 250,
     minNights: 2,
   },
   {
     name: "Vianočný pobyt",
     dates: "23. 12. – 28. 12.",
-    price: 300,
+    price: 350,
     minNights: 3,
     highlight: true,
   },
   {
     name: "Silvester",
     dates: "29. 12. – 1. 1.",
-    price: 500,
+    price: 450,
     minNights: 3,
     highlight: true,
   },
@@ -62,7 +62,7 @@ export default function Pricing() {
               Cenník
             </h2>
             <p className="text-charcoal-light mt-3 text-lg">
-              Cena za celý objekt / noc &middot; min. 1 osoba &middot; min. 2 noci
+              Cena za celý objekt / noc &middot; min. 1 osoba &middot; min. 2–3 noci podľa sezóny
             </p>
           </div>
         </ScrollReveal>
