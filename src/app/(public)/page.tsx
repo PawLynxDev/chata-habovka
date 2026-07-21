@@ -7,24 +7,32 @@ import PrivacyBanner from "@/components/sections/PrivacyBanner";
 import Pricing from "@/components/sections/Pricing";
 import BottomCTA from "@/components/sections/BottomCTA";
 import SectionTransition from "@/components/ui/SectionTransition";
+import { getContent } from "@/lib/content";
 
-export default function Home() {
+export default async function Home() {
+  const content = await getContent();
+
   return (
     <>
-      <Hero />
-      <About />
+      <Hero hero={content.hero} bookingUrl={content.bookingUrl} />
+      <About about={content.about} />
       <SectionTransition from="#FAF6F0" to="#2C2C2C" />
-      <WellnessTeaser />
+      <WellnessTeaser data={content.wellnessTeaser} />
       <SectionTransition from="#2C2C2C" to="#FAF6F0" />
-      <InteriorTeaser />
+      <InteriorTeaser data={content.interiorTeaser} />
       <SectionTransition from="#FAF6F0" to="#1A1A1A" />
-      <Reviews />
+      <Reviews reviews={content.reviews} bookingUrl={content.bookingUrl} />
       <SectionTransition from="#1A1A1A" to="#2D5016" />
-      <PrivacyBanner />
+      <PrivacyBanner data={content.privacyBanner} />
       <SectionTransition from="#2D5016" to="#FAF6F0" />
-      <Pricing />
+      <Pricing pricing={content.pricing} bookingUrl={content.bookingUrl} />
       <SectionTransition from="#FAF6F0" to="#F0E8D8" />
-      <BottomCTA />
+      <BottomCTA
+        data={content.bottomCta}
+        phone={content.phone}
+        phoneHref={content.phoneHref}
+        bookingUrl={content.bookingUrl}
+      />
     </>
   );
 }

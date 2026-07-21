@@ -106,6 +106,12 @@ export default function Footer() {
           >
             Ochrana osobných údajov
           </Link>
+          <Link
+            href="/login"
+            className="text-xs text-cream/40 transition-colors duration-200 hover:text-white"
+          >
+            Prihlásiť sa
+          </Link>
         </div>
       </div>
     </footer>

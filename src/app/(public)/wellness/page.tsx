@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Bike, Snowflake, Car, Dog } from "lucide-react";
 import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import BookingButton from "@/components/ui/BookingButton";
+import { getContent } from "@/lib/content";
+import { DynamicIcon } from "@/lib/icons";
 
 export const metadata: Metadata = {
   title: "Wellness & Záhrada - Sauna, Vírivka, Terasa",
@@ -13,55 +14,19 @@ export const metadata: Metadata = {
   },
 };
 
-const wellnessImages = [
-  { name: "wellness-sauna", alt: "Fínska sauna pre 6 osôb" },
-  { name: "wellness-hottub", alt: "Vírivka pod holým nebom s výhľadom na hory" },
-  { name: "wellness-shower", alt: "Dažďové sprchy" },
-];
+export default async function WellnessPage() {
+  const content = await getContent();
+  const wellness = content.wellness;
 
-const terraceImages = Array.from({ length: 17 }, (_, i) => ({
-  name: `terrace-${i + 1}`,
-  alt: `Terasa a záhrada - foto ${i + 1}`,
-}));
-
-const kidsImages = Array.from({ length: 2 }, (_, i) => ({
-  name: `kids-${i + 1}`,
-  alt: `Detský kútik - foto ${i + 1}`,
-}));
-
-const infoItems = [
-  {
-    icon: Bike,
-    title: "Úloženie bicyklov",
-    desc: "Uzamykateľná miestnosť",
-  },
-  {
-    icon: Snowflake,
-    title: "Úloženie lyží",
-    desc: "Vyhrievaná skiroom",
-  },
-  {
-    icon: Car,
-    title: "Parkovanie",
-    desc: "6 oplotených miest pri chate",
-  },
-  {
-    icon: Dog,
-    title: "Zvieratá",
-    desc: "Nie sú povolené",
-  },
-];
-
-export default function WellnessPage() {
   return (
     <>
       {/* Header */}
       <section className="bg-charcoal text-cream pt-32 pb-16 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <ScrollReveal>
-            <h1 className="font-serif text-5xl">Wellness & Záhrada</h1>
+            <h1 className="font-serif text-5xl">{wellness.headerTitle}</h1>
             <p className="text-cream/70 mt-4 text-lg">
-              Váš súkromný wellness priamo pri chate
+              {wellness.headerSubtitle}
             </p>
           </ScrollReveal>
         </div>
@@ -74,18 +39,18 @@ export default function WellnessPage() {
             <p className="tracking-widest uppercase text-gold text-sm">
               WELLNESS
             </p>
-            <h2 className="font-serif text-3xl mt-2">Váš privátny wellness</h2>
+            <h2 className="font-serif text-3xl mt-2">
+              {wellness.wellness.heading}
+            </h2>
             <p className="text-cream/70 mt-3 max-w-2xl">
-              Súkromná sauna pre 6 osôb, vírivka pod holým nebom s výhľadom na
-              hory, dva vonkajšie sprchy a ochladzovacia kaďa. Všetko len pre
-              vás.
+              {wellness.wellness.description}
             </p>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            {wellnessImages.map((img, i) => (
-              <ScrollReveal key={img.name} delay={(i + 1) as 1 | 2 | 3}>
+            {wellness.wellness.images.map((img, i) => (
+              <ScrollReveal key={img.id} delay={(i + 1) as 1 | 2 | 3}>
                 <ImagePlaceholder
-                  name={img.name}
+                  src={img.url}
                   alt={img.alt}
                   className="w-full aspect-[4/3] rounded-xl"
                   sizes="(max-width: 768px) 100vw, 33vw"
@@ -95,7 +60,7 @@ export default function WellnessPage() {
           </div>
           <ScrollReveal>
             <p className="text-cream/50 italic mt-8 text-center text-lg">
-              Ideálne na oddych po dni strávenom v horách
+              {wellness.wellnessFootnote}
             </p>
           </ScrollReveal>
         </div>
@@ -109,25 +74,23 @@ export default function WellnessPage() {
               EXTERIÉR
             </p>
             <h2 className="font-serif text-3xl text-charcoal mt-2">
-              Terasa a záhrada
+              {wellness.terrace.heading}
             </h2>
             <p className="text-charcoal-light mt-3 max-w-2xl">
-              Rozľahlá terasa s vonkajším sedením, altánok s grilom a
-              ohniskom, kotlík na guláš, záhradná hojdačka a stolný futbal.
-              Ideálne na grilovanie a večerné posedenia pri ohni.
+              {wellness.terrace.description}
             </p>
           </ScrollReveal>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-            {terraceImages.map((img, i) => {
-              const isWide = i === 0 || i >= 15;
+            {wellness.terrace.images.map((img, i) => {
+              const isWide = i === 0 || i >= wellness.terrace.images.length - 2;
               return (
                 <ScrollReveal
-                  key={img.name}
+                  key={img.id}
                   delay={((i % 4) + 1) as 1 | 2 | 3 | 4}
                   className={isWide ? "col-span-2" : ""}
                 >
                   <ImagePlaceholder
-                    name={img.name}
+                    src={img.url}
                     alt={img.alt}
                     className={`w-full rounded-lg ${
                       isWide ? "aspect-[16/9]" : "aspect-[4/3]"
@@ -153,18 +116,17 @@ export default function WellnessPage() {
               PRE DETI
             </p>
             <h2 className="font-serif text-3xl text-charcoal mt-2">
-              Detský raj
+              {wellness.kids.heading}
             </h2>
             <p className="text-charcoal-light mt-3 max-w-2xl">
-              Detské ihrisko s hojdačkou a preliezkami, detská herňa s hračkami
-              a futbalové ihrisko v blízkosti. Deti sa u nás nudiť nebudú.
+              {wellness.kids.description}
             </p>
           </ScrollReveal>
           <div className="grid grid-cols-2 gap-4 mt-8">
-            {kidsImages.map((img, i) => (
-              <ScrollReveal key={img.name} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
+            {wellness.kids.images.map((img, i) => (
+              <ScrollReveal key={img.id} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
                 <ImagePlaceholder
-                  name={img.name}
+                  src={img.url}
                   alt={img.alt}
                   className="w-full aspect-[4/3] rounded-lg"
                   sizes="50vw"
@@ -180,15 +142,19 @@ export default function WellnessPage() {
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <h2 className="font-serif text-3xl text-charcoal text-center">
-              Praktické informácie
+              {wellness.infoHeading}
             </h2>
           </ScrollReveal>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-            {infoItems.map((item, i) => (
-              <ScrollReveal key={item.title} delay={((i + 1) as 1 | 2 | 3 | 4)}>
+            {wellness.infoItems.map((item, i) => (
+              <ScrollReveal key={item.id} delay={((i + 1) as 1 | 2 | 3 | 4)}>
                 <div className="bg-white rounded-xl p-6 text-center shadow-sm">
                   <div className="flex justify-center mb-4">
-                    <item.icon className="w-8 h-8 text-forest" strokeWidth={1.5} />
+                    <DynamicIcon
+                      iconKey={item.iconKey}
+                      className="w-8 h-8 text-forest"
+                      strokeWidth={1.5}
+                    />
                   </div>
                   <h3 className="font-serif text-lg text-charcoal">
                     {item.title}
@@ -213,7 +179,11 @@ export default function WellnessPage() {
             <p className="text-charcoal-light mt-3 mb-8">
               Rezervujte si termín a užite si wellness priamo pri chate.
             </p>
-            <BookingButton variant="primary" size="large" />
+            <BookingButton
+              variant="primary"
+              size="large"
+              href={content.bookingUrl}
+            />
           </ScrollReveal>
         </div>
       </section>

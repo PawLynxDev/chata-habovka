@@ -2,6 +2,7 @@ interface BookingButtonProps {
   variant?: "primary" | "outline";
   size?: "default" | "large";
   className?: string;
+  href?: string;
 }
 
 const BOOKING_URL =
@@ -11,6 +12,7 @@ export default function BookingButton({
   variant = "primary",
   size = "default",
   className = "",
+  href = BOOKING_URL,
 }: BookingButtonProps) {
   const baseClasses =
     "inline-flex items-center justify-center font-sans font-medium rounded-full transition-all duration-300 cursor-pointer";
@@ -25,7 +27,7 @@ export default function BookingButton({
 
   return (
     <a
-      href={BOOKING_URL}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       className={`${baseClasses} ${sizeClasses} ${variantClasses} ${className}`.trim()}

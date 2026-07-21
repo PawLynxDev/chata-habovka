@@ -1,40 +1,44 @@
 import Link from "next/link";
 import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import type { SiteContent } from "@/lib/content-types";
 
-export default function InteriorTeaser() {
+export default function InteriorTeaser({
+  data,
+}: {
+  data: SiteContent["interiorTeaser"];
+}) {
   return (
     <section className="bg-cream py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <h2 className="font-serif text-4xl text-center text-charcoal">
-          Interiér chaty
+          {data.heading}
         </h2>
         <p className="text-lg text-charcoal-light text-center max-w-2xl mx-auto mt-4">
-          Moderný interiér s dôrazom na pohodlie. Štýlová obývačka s krbom,
-          plne vybavená kuchyňa a 4 pohodlné spálne.
+          {data.text}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
           <ScrollReveal>
             <ImagePlaceholder
-              name="interior-living-1"
-              alt="Obývačka"
+              src={data.living.url}
+              alt={data.living.alt}
               className="w-full aspect-[4/3] rounded-xl"
             />
           </ScrollReveal>
 
           <ScrollReveal delay={1}>
             <ImagePlaceholder
-              name="interior-kitchen-1"
-              alt="Kuchyňa"
+              src={data.kitchen.url}
+              alt={data.kitchen.alt}
               className="w-full aspect-[4/3] rounded-xl"
             />
           </ScrollReveal>
 
           <ScrollReveal delay={2}>
             <ImagePlaceholder
-              name="interior-bedroom-1"
-              alt="Spálňa"
+              src={data.bedroom.url}
+              alt={data.bedroom.alt}
               className="w-full aspect-[4/3] rounded-xl"
             />
           </ScrollReveal>

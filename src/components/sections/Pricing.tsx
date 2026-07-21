@@ -1,55 +1,15 @@
-import { Euro, Flame, Waves, Sparkles } from "lucide-react";
+import { Euro } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { DynamicIcon } from "@/lib/icons";
+import type { SiteContent } from "@/lib/content-types";
 
-const seasons = [
-  {
-    name: "Zimná sezóna",
-    dates: "2. 1. – 31. 3.",
-    price: 250,
-    minNights: 3,
-  },
-  {
-    name: "Letná mimosezóna",
-    dates: "1. 4. – 30. 6.",
-    price: 250,
-    minNights: 2,
-  },
-  {
-    name: "Veľkonočný pobyt",
-    dates: "3. 4. – 6. 4.",
-    price: 350,
-    minNights: 3,
-    highlight: true,
-  },
-  {
-    name: "Letná sezóna",
-    dates: "1. 7. – 31. 8.",
-    price: 250,
-    minNights: 3,
-  },
-  {
-    name: "Zimná mimosezóna",
-    dates: "1. 9. – 22. 12.",
-    price: 250,
-    minNights: 2,
-  },
-  {
-    name: "Vianočný pobyt",
-    dates: "23. 12. – 28. 12.",
-    price: 350,
-    minNights: 3,
-    highlight: true,
-  },
-  {
-    name: "Silvester",
-    dates: "29. 12. – 1. 1.",
-    price: 450,
-    minNights: 3,
-    highlight: true,
-  },
-];
-
-export default function Pricing() {
+export default function Pricing({
+  pricing,
+  bookingUrl,
+}: {
+  pricing: SiteContent["pricing"];
+  bookingUrl: string;
+}) {
   return (
     <section className="bg-cream py-20 px-4">
       <div className="max-w-4xl mx-auto">
@@ -59,17 +19,15 @@ export default function Pricing() {
               <Euro size={32} className="text-forest" />
             </div>
             <h2 className="font-serif text-4xl md:text-5xl text-charcoal">
-              Cenník
+              {pricing.heading}
             </h2>
-            <p className="text-charcoal-light mt-3 text-lg">
-              Cena za celý objekt / noc &middot; min. 1 osoba &middot; min. 2–3 noci podľa sezóny
-            </p>
+            <p className="text-charcoal-light mt-3 text-lg">{pricing.note}</p>
           </div>
         </ScrollReveal>
 
         <div className="grid gap-3">
-          {seasons.map((s, i) => (
-            <ScrollReveal key={s.name + s.dates}>
+          {pricing.seasons.map((s) => (
+            <ScrollReveal key={s.id}>
               <div
                 className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 px-6 py-4 rounded-2xl transition ${
                   s.highlight
@@ -119,54 +77,57 @@ export default function Pricing() {
         <ScrollReveal>
           <div className="mt-16 text-center">
             <h3 className="font-serif text-3xl md:text-4xl text-charcoal mb-10">
-              Doplatok za služby
+              {pricing.servicesHeading}
             </h3>
 
             <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-              <div className="bg-white border border-cream-dark rounded-2xl p-8 text-center">
-                <div className="inline-flex items-center justify-center bg-gold/10 p-3 rounded-full mb-4">
-                  <Flame size={32} className="text-gold" />
-                </div>
-                <h4 className="font-serif text-2xl text-charcoal">Sauna</h4>
-                <p className="text-forest text-3xl font-semibold mt-2">
-                  80&nbsp;&euro;
-                  <span className="text-charcoal-light text-base font-normal">
-                    {" "}
-                    / pobyt
-                  </span>
-                </p>
-              </div>
-
-              <div className="bg-white border border-cream-dark rounded-2xl p-8 text-center">
-                <div className="inline-flex items-center justify-center bg-gold/10 p-3 rounded-full mb-4">
-                  <Waves size={32} className="text-gold" />
-                </div>
-                <h4 className="font-serif text-2xl text-charcoal">
-                  Vírivka / Jacuzzi
-                </h4>
-                <p className="text-forest text-3xl font-semibold mt-2">
-                  80&nbsp;&euro;
-                  <span className="text-charcoal-light text-base font-normal">
-                    {" "}
-                    / pobyt
-                  </span>
-                </p>
-              </div>
+              {pricing.services.map((service) => (
+                  <div
+                    key={service.id}
+                    className="bg-white border border-cream-dark rounded-2xl p-8 text-center"
+                  >
+                    <div className="inline-flex items-center justify-center bg-gold/10 p-3 rounded-full mb-4">
+                      <DynamicIcon
+                        iconKey={service.iconKey}
+                        size={32}
+                        className="text-gold"
+                      />
+                    </div>
+                    <h4 className="font-serif text-2xl text-charcoal">
+                      {service.name}
+                    </h4>
+                    <p className="text-forest text-3xl font-semibold mt-2">
+                      {service.price}&nbsp;&euro;
+                      <span className="text-charcoal-light text-base font-normal">
+                        {" "}
+                        {service.unit}
+                      </span>
+                    </p>
+                  </div>
+              ))}
             </div>
 
             <div className="mt-6 bg-forest rounded-2xl p-6 max-w-2xl mx-auto">
               <div className="flex items-center justify-center gap-3">
-                <Sparkles size={24} className="text-gold-light" />
+                <DynamicIcon
+                  iconKey={pricing.combined.iconKey}
+                  size={24}
+                  className="text-gold-light"
+                />
                 <span className="text-white font-serif text-xl">
-                  Sauna + Vírivka spolu
+                  {pricing.combined.name}
                 </span>
-                <Sparkles size={24} className="text-gold-light" />
+                <DynamicIcon
+                  iconKey={pricing.combined.iconKey}
+                  size={24}
+                  className="text-gold-light"
+                />
               </div>
               <p className="text-gold-light text-3xl font-semibold mt-2">
-                150&nbsp;&euro;
+                {pricing.combined.price}&nbsp;&euro;
                 <span className="text-white/70 text-base font-normal">
                   {" "}
-                  / pobyt
+                  {pricing.combined.unit}
                 </span>
               </p>
             </div>
@@ -175,9 +136,9 @@ export default function Pricing() {
 
         <ScrollReveal>
           <p className="text-center text-charcoal-light mt-10 text-sm">
-            Aktuálne ceny a dostupnosť nájdete na{" "}
+            {pricing.footnote}{" "}
             <a
-              href="https://www.megaubytovanie.sk/chata-za-studenym-potokom"
+              href={bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-forest font-semibold underline underline-offset-2 hover:text-forest-light transition"
