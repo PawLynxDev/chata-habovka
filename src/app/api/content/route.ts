@@ -3,7 +3,7 @@ import {
   deleteOrphanedImages,
   readContentRaw,
   writeContent,
-} from "@/lib/blob-content";
+} from "@/lib/content-store";
 import { SEED_CONTENT } from "@/lib/seed";
 import { siteContentSchema } from "@/lib/content-schema";
 import { requireAuth } from "@/lib/auth";

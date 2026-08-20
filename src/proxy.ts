@@ -10,8 +10,7 @@ export async function proxy(req: NextRequest) {
 
   const { pathname } = req.nextUrl;
 
-  // Write API → 401 JSON (auth routy /api/auth/* nie sú v matcheri, ostávajú dostupné;
-  // /api/upload kontroluje auth interne v onBeforeGenerateToken).
+  // Write API → 401 JSON (auth routy /api/auth/* nie sú v matcheri, ostávajú dostupné).
   if (pathname.startsWith("/api/")) {
     return NextResponse.json({ error: "Neautorizované" }, { status: 401 });
   }
@@ -27,5 +26,6 @@ export const config = {
     "/admin/:path*",
     "/api/content/:path*",
     "/api/site/:path*",
+    "/api/upload/:path*",
   ],
 };

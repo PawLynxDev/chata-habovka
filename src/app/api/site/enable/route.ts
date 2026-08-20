@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/auth";
-import { readContentRaw, writeContent } from "@/lib/blob-content";
+import { readContentRaw, writeContent } from "@/lib/content-store";
 import { SEED_CONTENT } from "@/lib/seed";
 
 export const runtime = "nodejs";

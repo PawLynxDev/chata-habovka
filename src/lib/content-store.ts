@@ -1,7 +1,12 @@
-// Čítanie a zápis content.json do Vercel Blob.
-// Používa sa na serveri (vyžaduje BLOB_READ_WRITE_TOKEN).
+// Čítanie a zápis content.json do Cloudflare R2 (S3 API).
+// Používa sa na serveri (vyžaduje R2_* env premenné).
 import "server-only";
-import { del, list, put } from "@vercel/blob";
+import {
+  DeleteObjectsCommand,
+  GetObjectCommand,
+  PutObjectCommand,
+} from "@aws-sdk/client-s3";
+import { r2, r2Bucket, r2KeyFromUrl } from "./r2";
 import {
   CONTENT_PATHNAME,
   CONTENT_SCHEMA_VERSION,
@@ -9,11 +14,6 @@ import {
 } from "./content-types";
 
 export { CONTENT_PATHNAME };
-
-/** Či je URL skutočná Vercel Blob URL (nie pôvodná /images/ seed cesta). */
-export function isBlobUrl(url: string): boolean {
-  return url.includes(".blob.vercel-storage.com");
-}
 
 /** Vyzbiera všetky URL fotiek naprieč celým obsahom. */
 export function collectImageUrls(c: SiteContent): string[] {
@@ -37,50 +37,58 @@ export function collectImageUrls(c: SiteContent): string[] {
   return urls;
 }
 
-/** Zmaže z Blob fotky, ktoré boli v starom obsahu, ale už nie sú v novom (len Blob URL). */
+/** Zmaže z R2 fotky, ktoré boli v starom obsahu, ale už nie sú v novom (len naše nahrané URL). */
 export async function deleteOrphanedImages(
   oldContent: SiteContent,
   newContent: SiteContent
 ): Promise<void> {
-  const newUrls = new Set(collectImageUrls(newContent));
-  const orphans = collectImageUrls(oldContent).filter(
-    (u) => isBlobUrl(u) && !newUrls.has(u)
-  );
-  if (orphans.length === 0) return;
   try {
-    await del(orphans);
+    const newUrls = new Set(collectImageUrls(newContent));
+    const orphanKeys = collectImageUrls(oldContent)
+      .filter((u) => !newUrls.has(u))
+      .map(r2KeyFromUrl)
+      .filter((k): k is string => k !== null);
+    if (orphanKeys.length === 0) return;
+    await r2().send(
+      new DeleteObjectsCommand({
+        Bucket: r2Bucket(),
+        Delete: { Objects: orphanKeys.map((Key) => ({ Key })), Quiet: true },
+      })
+    );
   } catch {
     // best-effort: zlyhanie čistenia nesmie zhodiť uloženie
   }
 }
 
-/** Načíta content.json z Blob. Vráti null ak neexistuje alebo Blob nie je dostupný. */
+/** Načíta content.json z R2. Vráti null ak neexistuje alebo R2 nie je dostupné. */
 export async function readContentRaw(): Promise<SiteContent | null> {
   try {
-    const { blobs } = await list({ prefix: CONTENT_PATHNAME, limit: 1 });
-    const blob = blobs.find((b) => b.pathname === CONTENT_PATHNAME);
-    if (!blob) return null;
-    const res = await fetch(blob.url, { cache: "no-store" });
-    if (!res.ok) return null;
-    return (await res.json()) as SiteContent;
+    const res = await r2().send(
+      new GetObjectCommand({ Bucket: r2Bucket(), Key: CONTENT_PATHNAME })
+    );
+    const text = await res.Body?.transformToString();
+    if (!text) return null;
+    return JSON.parse(text) as SiteContent;
   } catch {
     return null;
   }
 }
 
-/** Zapíše content.json do Blob (prepíše existujúci). Aktualizuje updatedAt a schemaVersion. */
+/** Zapíše content.json do R2 (prepíše existujúci). Aktualizuje updatedAt a schemaVersion. */
 export async function writeContent(content: SiteContent): Promise<SiteContent> {
   const toWrite: SiteContent = {
     ...content,
     schemaVersion: CONTENT_SCHEMA_VERSION,
     updatedAt: new Date().toISOString(),
   };
-  await put(CONTENT_PATHNAME, JSON.stringify(toWrite), {
-    access: "public",
-    contentType: "application/json",
-    addRandomSuffix: false,
-    allowOverwrite: true,
-    cacheControlMaxAge: 0,
-  });
+  await r2().send(
+    new PutObjectCommand({
+      Bucket: r2Bucket(),
+      Key: CONTENT_PATHNAME,
+      Body: JSON.stringify(toWrite),
+      ContentType: "application/json",
+      CacheControl: "no-store",
+    })
+  );
   return toWrite;
 }

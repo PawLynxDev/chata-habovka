@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "pub-f4ff2aa560894b45a3f4885b56401b38.r2.dev",
+      },
+      // Staré fotky vo Vercel Blob – ponechané kvôli obsahu spred migrácie na R2.
+      {
+        protocol: "https",
         hostname: "*.public.blob.vercel-storage.com",
       },
     ],
